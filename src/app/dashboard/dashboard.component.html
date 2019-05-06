@@ -1,0 +1,127 @@
+<div class="component-wrap">
+  <div class="col-md-7">
+    <div class="dashboard-options card-outter">
+      <h2>Cadastros {{usuario.scopes.lenght}}</h2>
+      <div class="cards-wrap">
+        <a routerLink="/new/ss">
+          <div class="dashboard-options-card cardc">
+            <img src="assets/img/icons/008-portfolio.png">
+            <p><b>Solicitação de Serviço</b><br>Cadastrar SS</p>
+          </div>
+        </a>
+        <a routerLink="/new/employee">
+          <div class="dashboard-options-card cardc">
+            <img src="assets/img/icons/012-target.png">
+            <p><b>Funcionários</b><br>Cadastrar funcionários</p>
+          </div>
+        </a>
+        <a routerLink="/new/squad">
+          <div class="dashboard-options-card cardc">
+            <img src="assets/img/icons/011-structure.png">
+            <p><b>Squads</b><br>Cadastrar squads</p>
+          </div>
+        </a>
+        <a *ngIf="isadmin" routerLink="/new/comunidade">
+          <div class="dashboard-options-card cardc" >
+            <img src="assets/img/icons/014-teamwork-1.png">
+            <p><b>Comunidade</b><br>Cadastrar Comunidade</p>
+          </div>
+        </a>
+        <a *ngIf="isadmin" routerLink="/new/user">
+          <div class="dashboard-options-card cardc">
+            <img src="assets/img/icons/015-teamwork-2.png">
+            <p><b>Usuário</b><br>Cadastrar Líderes/Gerentes</p>
+          </div>
+        </a>
+        <!--
+        <a routerLink="/edit/squad">
+          <div class="dashboard-options-card cardc">
+            <img src="assets/img/icons/025-teamwork-12.png">
+            <p><b>Squads</b><br>Editar squads</p>
+          </div>
+        </a>
+        -->
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="dashboard-expiring-ss card-outter">
+      <h2>Lançamento de horas</h2>
+      <div class="cards-wrap">
+        <a routerLink="/new/hours">
+          <div class="dashboard-options-card cardc">
+            <img src="assets/img/icons/022-teamwork-9.png">
+            <p><b>Lancamentos</b><br>Lançar horas diárias</p>
+          </div>
+        </a>
+        <a *ngIf="isadmin" routerLink="/new/hoursmanager">
+          <div class="dashboard-options-card cardc">
+            <img src="assets/img/icons/021-teamwork-8.png">
+            <p><b>Lancamento Especifico</b><br>Lançar horas Itaú</p>
+          </div>
+        </a>
+        <!-- <a routerLink="/new/hoursleader">
+          <div class="dashboard-options-card cardc">
+            <img src="assets/img/icons/002-connection.png">
+            <p><b>Líderes Técnicos</b><br>Lançar horas diárias</p>
+          </div>
+        </a> -->
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <div class="dashboard-expiring-ss card-outter">
+      <h2>Gerenciar</h2>
+      <div class="cards-wrap">
+        <a routerLink="/manage/employee">
+          <div class="dashboard-options-card cardc">
+            <img src="assets/img/icons/012-target.png">
+            <p><b>Funcionários</b><br>Gerenciar Funcionários</p>
+          </div>
+        </a>
+        <a routerLink="/manage/squads">
+          <div class="dashboard-options-card cardc">
+            <img src="assets/img/icons/011-structure.png">
+            <p><b>Squads</b><br>Gerenciar Squads</p>
+          </div>
+        </a>
+        <a *ngIf="isadmin" routerLink="/manage/comunidades">
+          <div class="dashboard-options-card cardc">
+            <img src="assets/img/icons/014-teamwork-1.png">
+            <p><b>Comunidade</b><br>Gerenciar Comunidade</p>
+          </div>
+        </a>
+        <a *ngIf="isadmin" routerLink="/manage/users">
+          <div class="dashboard-options-card cardc">
+            <img src="assets/img/icons/015-teamwork-2.png">
+            <p><b>Usuário</b><br>Gerenciar Usuários</p>
+          </div>
+        </a>
+    </div>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div *ngIf="isadmin" class="dashboard-expiring-ss card-outter">
+      <h2>Relatorios</h2>
+      <div class="cards-wrap">
+        <a routerLink="/report/hours">
+          <div class="dashboard-options-card cardc">
+            <img src="assets/img/icons/008-portfolio.png">
+            <p><b>Relatorios de Horas</b><br>Gerar Relatorios de Horas Lancadas</p>
+          </div>
+        </a>
+        <a>
+          <div class="dashboard-options-card cardc">
+            <img src="assets/img/icons/008-portfolio.png">
+            <p><b>Relatorios Recursos</b><br>Gerar Relatorio de Recursos</p>
+          </div>
+        </a>
+        <a >
+          <div class="dashboard-options-card cardc">
+            <img src="assets/img/icons/008-portfolio.png">
+            <p><b>Relatorio para Auditoria</b><br>Gerar Relatorios</p>
+          </div>
+        </a>
+    </div>
+  </div>
+</div>

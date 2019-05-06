@@ -1,0 +1,179 @@
+<div class="component-wrap">
+
+  <div class="submit-wrap col-md-11">
+    <div class="title-description">
+      <h2>Cadastro de SS</h2>
+      <p>Prencha todos os campos abaixo para cadastrar uma nova Solicitação de Serviço.</p>
+      <hr>
+    </div>
+    <form class="needs-validation" (submit)="CadastrarSS()" novalidate>
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <label for="id">ID da SS</label>
+          <input 
+          type="number" 
+          class="form-control" 
+          id="id" 
+          name="id"
+          min="1" 
+          placeholder="ID" 
+          [(ngModel)]="modelodess.ssId"
+          required>
+          <small id="idHelpBlock" class="form-text text-muted">
+            Use o número do ID da SS, emitido pelo banco.
+          </small>
+          <div class="valid-feedback">
+            Ótimo!
+          </div>
+          <div class="invalid-feedback">
+            Você precisa dizer o ID da SS.
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="horas">Total de horas</label>
+          <input 
+          type="number" 
+          class="form-control" 
+          id="horas" 
+          name="horas" 
+          placeholder="Horas" 
+          min="1" 
+          [(ngModel)]="modelodess.totalHoras" 
+          required>
+          <small id="totalHorasHelpBlock" class="form-text text-muted">
+            Use um número inteiro como total de horas.
+          </small>
+          <div class="valid-feedback">
+            Ótimo!
+          </div>
+          <div class="invalid-feedback">
+            Digite a quantidade de horas da SS!
+          </div>
+        </div>
+      </div>
+      <div class="form-row mb-3">
+        <label for="descricao">Descrição da SS</label>
+        <input 
+        type="text"
+        class="form-control"
+        id="descricao"
+        name="descricao"
+        placeholder="Descrição"
+        [(ngModel)]="modelodess.descricao">
+        <small id="idHelpBlock" class="form-text text-muted">
+          (Opcional)
+        </small>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <label for="datainicio">Data de início</label>
+          <input 
+          type="date" 
+          class="form-control" 
+          id="datainicio" 
+          name="datainicio" 
+          [(ngModel)]="modelodess.dataInicio" 
+          required>
+          <div class="valid-feedback">
+            Ótimo!
+          </div>
+          <div class="invalid-feedback">
+            Preencha a data de início!
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="datatermino">Data de término</label>
+          <input 
+          type="date" 
+          class="form-control" 
+          id="datatermino" 
+          name="datatermino" 
+          [(ngModel)]="modelodess.dataTermino" 
+          required>
+          <div class="valid-feedback">
+            Ótimo!
+          </div>
+          <div class="invalid-feedback">
+            Preencha a data de término!
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="tipo">Tipo da SS</label>
+            <select class="custom-select" id="tipo" [(ngModel)]="modelodess.forLider" (change)="limpartabela();mostrarSquad()" name="tipo" required>
+               <option [ngValue]="false">Selecione...</option>
+              <option [ngValue]="false">Squad</option>
+              <option [ngValue]="true">Líder técnico</option>
+            </select>
+        </div>
+        <div *ngIf="mostrarsquad"class="col-md-6 mb-3">
+          <label for="squad">Squad da SS</label>
+          <select class="custom-select" id="squad" name="squad" [(ngModel)]="selectedSquad" (change)="ficarvisivel()" required>
+            <option *ngFor="let squad of squadlist" [ngValue]="squad">
+              {{ squad.name }} | Lider: {{squad.lider.nome}}</option>
+          </select>
+          <div class="valid-feedback">
+            Ótimo!
+          </div>
+          <div class="invalid-feedback">
+            Selecione um dos squads!
+          </div>
+        </div>
+      </div>
+      <div class="btn-centerer">
+      </div>
+    </form>
+    <div  *ngIf="visivel == 1" class="title-description">
+        <h2>Distribua as horas</h2>
+        <p>Necessario registrar todas as horas disponiveis da SS entre seus recursos.</p>
+      </div>
+        <table *ngIf="visivel == 1"  class="table">
+        <thead class="thead">
+          <tr>
+              <td scope="col">Funcionario</td>
+              <td scope="col">Perfil</td>
+              <td scope="col">Task</td>
+              <td scope="col">Horas</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let hrDisp of modelodess.horasDisponiveis">
+            <td>{{hrDisp.funcionario.nome}}</td>
+            <td>{{hrDisp.funcionario.perfil}}</td>
+            <td>
+              <input 
+              type="number" 
+              class="form-control" 
+              [(ngModel)]="hrDisp.task" 
+              placeholder="0" 
+              ngDefaultControl>
+            </td>
+            <td>
+              <input 
+              type="number" 
+              class="form-control" 
+              [(ngModel)]="hrDisp.horasPlanejadas" 
+              placeholder="0" 
+              ngDefaultControl>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="visivel == 2" class="form-row mb-3">
+          <label for="task">Task</label>
+          <input 
+          type="number" 
+          class="form-control" 
+          id="task" 
+          name="task"
+          placeholder="0" 
+          [(ngModel)]="modelodess.horasDisponiveis[0].task"
+          >
+      </div>
+      <div class="btn-centerer">
+      <button type="submit" (click)="CadastrarSS()" class="btn btn-primary def-button">Cadastrar SS</button>
+      <button type="reset" class="btn btn-primary clear-button">LIMPAR</button>
+    </div>
+    </div>
+</div>

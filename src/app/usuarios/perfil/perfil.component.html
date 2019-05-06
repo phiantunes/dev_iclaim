@@ -1,0 +1,79 @@
+<div id="component-wrap" class="component-wrap">
+  <div class="submit-wrap col-md-11">
+    <div class="title-description">
+      <h2>Perfil de Usuário</h2>
+      <p>Nesta seção você pode visualizar suas informações, atualizar seus dados ou trocar sua senha.</p>
+      <hr>
+    </div>
+    <h4 class="mb-4">Pedro Henrique</h4>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-4">
+          <div class="list-group">
+            <a class="list-group-item list-group-item-action btncolor" data-toggle="list" href="#list-01">Username</a>
+            <a class="list-group-item list-group-item-action btncolor" data-toggle="list" href="#list-02">Informações</a>
+            <a class="list-group-item list-group-item-action btncolor" data-toggle="list" href="#list-03">Alterar senha</a>
+          </div>
+        </div>
+        <div class="col-8">
+          <div class="tab-content">
+            <div class="tab-pane fade username" id="list-01">
+              <label for="email">E-mail</label>
+              <input type="email" class="form-control" id="email" placeholder="{{usuario.sub}}" disabled>
+              <small id="emailHelpBlock" class="form-text text-muted">
+                Você não pode alterar seu e-mail.
+              </small>
+            </div>
+            <div class="tab-pane fade informacoes" id="list-02">
+                <label for="funcional">Funcional</label>
+                <input type="number" class="form-control" id="funcional" placeholder="97643185" disabled>
+                <small id="emailHelpBlock" class="form-text text-muted mb-2">
+                  Você não pode alterar sua funcional.
+                </small>
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" id="nome" placeholder="Pedro Henrique" disabled>
+                <small id="emailHelpBlock" class="form-text text-muted mb-2">
+                  Você não pode alterar seu nome.
+                </small>
+                <label for="email">E-mail</label>
+                <input type="email" class="form-control" id="email" placeholder="{{usuario.sub}}" disabled>
+                <small id="emailHelpBlock" class="form-text text-muted mb-2">
+                  Você não pode alterar seu e-mail.
+                </small>
+                <label for="perfil">Perfil</label>
+                <input type="text" class="form-control" id="perfil" placeholder="Java" disabled>
+                <small id="emailHelpBlock" class="form-text text-muted mb-2">
+                  Você não pode alterar seu perfil.
+                </small>
+            </div>
+
+            <div class="tab-pane fade alterarSenha" id="list-03">
+
+
+              <label for="inputPassword5">Digite sua senha atual</label>
+              <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+
+              <label for="inputPassword5">Digite sua nova senha</label>
+              <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+              <small id="passwordHelpBlock" class="form-text text-muted">
+                Seu password necessita ter entre 6-20 characters, contendo letras, números, e não conter espaços,
+                characters especiais, ou emoji.
+              </small>
+
+              <label for="inputPassword5">Digite sua senha nova senha novamente</label>
+              <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+              <small id="passwordHelpBlock" class="form-text text-muted">
+                Seu password necessita ter entre 6-20 characters, contendo letras, números, e não conter espaços,
+                characters especiais, ou emoji.
+              </small>
+
+              <button class="btn btn btn-primary btnSize mt-3">Salvar</button>
+
+            </div>
+          </div>
+        </div>
+      </div><!-- row -->
+
+    </div>
+  </div>
+</div>

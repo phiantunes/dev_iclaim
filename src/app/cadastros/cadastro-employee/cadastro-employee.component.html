@@ -1,0 +1,96 @@
+<div id="component-wrap" class="component-wrap">
+
+  <div class="submit-wrap col-md-11">
+    <div class="title-description">
+      <h2>Cadastro de Funcionário</h2>
+      <p>Prencha todos os campos abaixo para cadastrar um novo funcionário.</p>
+      <hr>
+    </div>
+    <form class="needs-validation" (submit)="CadastrarFuncionario()" novalidate>
+      <div class="form-row">
+        <div class="col-md-12 mb-3">
+          <label for="nome">Nome completo</label>
+
+          <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome completo"
+            [(ngModel)]="model.nome" required>
+
+          <div class="valid-feedback">
+            Ótimo!
+          </div>
+          <div class="invalid-feedback">
+            Você precisa preencher o primeiro nome.
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <label for="email">E-mail</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Digite o e-mail"
+            [(ngModel)]="model.email" required>
+            <small id="emailHelpBlock" class="form-text text-muted">
+              Utilize sempre o e-mail @ibm.com do funcionário.
+            </small>
+          <div class="valid-feedback">
+            Ótimo!
+          </div>
+          <div class="invalid-feedback">
+            Você precisa preencher o e-mail.
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="idFuncional">Funcional</label>
+          <input type="number" class="form-control" id="idFuncional" name="idFuncional" placeholder="Digite o funcional"
+            [(ngModel)]="model.idFuncional" required>
+            <small id="funcionalHelpBlock" class="form-text text-muted">
+              Use o código emitido pelo banco para este funcionário.
+            </small>
+          <div class="valid-feedback">
+            Ótimo!
+          </div>
+          <div class="invalid-feedback">
+            Você precisa preencher o funcional.
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <label for="perfil">Perfil do funcionário</label>
+          <select class="custom-select" id="perfil" name="perfil" (change)="verifica()" [(ngModel)]="model.perfil" required>
+            <option value="">Escolha...</option>
+            <option value="Java">Java</option>
+            <option value="Cobol">Cobol</option>
+            <option value="DotNet">.Net</option>
+          </select>
+          <small id="perfilHelpBlock" class="form-text text-muted">
+            Selecione o perfil de desenvolvedor deste funcionário.
+          </small>
+          <div class="valid-feedback">
+            Ótimo!
+          </div>
+          <div class="invalid-feedback">
+            Selecione um dos perfis!
+          </div>
+        </div>
+        <div class="col-md-6 mb-3" *ngIf="verificar == 1">
+            <label for="squad">Squad do funcionário</label>
+            <select class="custom-select" id="squad" name="squad" [(ngModel)]="model.squad" required>
+              <option *ngFor="let squad of squadlist | async" [ngValue]="squad">{{ squad.name }}</option>
+            </select>
+            <small id="squadHelpBlock" class="form-text text-muted">
+              Se estiver cadastrando um líder técnico, use a opção "Sem squad...".
+            </small>
+            <div class="valid-feedback">
+              Ótimo!
+            </div>
+            <div class="invalid-feedback">
+              Selecione um dos squads!
+            </div>
+          </div>
+      </div>
+      <div class="btn-centerer">
+        <button type="submit" class="btn btn-primary def-button">Cadastrar Funcionário</button>
+        <button type="reset" class="btn btn-primary clear-button">LIMPAR</button>
+      </div>
+    </form>
+  </div>
+</div>

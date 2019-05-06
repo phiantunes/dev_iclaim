@@ -1,0 +1,76 @@
+<div id="component-wrap" class="component-wrap">
+
+  <div class="submit-wrap col-md-12">
+    <div class="title-description">
+      <h2>Lançamento de Horas Diárias</h2>
+      <p>Gerente, aqui estao disponiveis para voce todas os lancamentos de horas para o dia de hoje. Este formulário e
+         editavel pelos lideres <b>até às 15h</b> de cada dia. Entao faca seu lancamento apos este horario para manter a integridade.</p>
+      <hr>
+    </div>
+    <form class="form" name="LancamentoHoras" novalidate>
+        <p id="weekdayP"></p>
+          <div class="form-row row-flex">
+            <div *ngFor="let comunidade of comunidades" class="card-outter col-md-12">
+              <h4>Comunidade: {{comunidade.comunidadeName}}</h4>
+              <div *ngFor="let squad of comunidade.squads" class="card-outter ss col-md-12">
+                  <h5>Squad: {{squad.name}}</h5>
+                  <div *ngFor="let ss of squad.sss" class="card-outter ss col-md-12">
+                    <div class='row'>
+                      <div class="col-md-9" style='line-height: 80%;'>    
+                        <label>
+                          [SS {{(ss.forLider == true?"Lider":"Squad")}}: {{ ss.ssId }}] - {{ ss.descricao}}</label> <br/>
+                        <label class='subtitulo'>Preiodo: {{ ss.dataInicio | date: 'dd/MM/yyyy' }} - {{ ss.dataTermino | date: 'dd/MM/yyyy' }}</label><br/>
+                        <label class='subtitulo'>
+                            Horas Restantes: {{ ss.horasRestantes }}
+                        </label> 
+                      </div>
+                      <div class="col-md-3"> 
+                        
+                        <button (click)="nextPage(ss)" class="btn btn-primary def-button btn-func btn-change-page btn-paginacao" style='width:50px;margin:0;top:0;float:right;'>>></button>
+                        <button (click)="actualPage(ss)" class="btn btn-primary def-button btn-func btn-change-page" style='width:70px;margin:0;top:0;float:right;margin-right:10px;'>hoje</button>
+                        <button (click)="previousPage(ss)" class="btn btn-primary def-button btn-func btn-paginacao" style='width:50px;margin:0;top:0;margin-right:10px;float:right;'><<</button>
+                        <br/><br/>
+                        <label class='subtitulo float-right' style='text-align:center;margin:0;top:0;float:right;margin-right:10px;vertical-align:middle;' *ngFor="let hrPrev of ss.horasDisponiveis[0].paginacaoHorasPrev[ss.selectedPage].horasPrevista">{{hrPrev.data | date:"EEEE"}} ({{hrPrev.data | date:"dd/MM/yyyy"}})</label>
+                                             
+                      </div>
+                      
+                      <div class="table-responsive"style='margin-top:20px;'>
+                          <table class="table ">
+                            <thead class="thead">
+                              <tr>
+                                <td align="center" style='vertical-align: middle;' scope="col">Funcional</td>
+                                <td align="center" style='vertical-align: middle;' scope="col">Funcionario</td>
+                                <td align="center" style='vertical-align: middle;' scope="col">Task</td>
+                                <td align="center" scope="col">H. Prevista</td>
+                                <td align="center" scope="col" style='font-weight:600;'>H. Lancadas</td>
+                                <td align="center" style='vertical-align: middle;' scope="col">Confirmar</td>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <ng-container *ngFor="let hrDisp of ss.horasDisponiveis">                              
+                                <tr [className]="hrDisp.paginacaoHorasPrev[ss.selectedPage].horasPrevista[0].lancamentoConfirmado ? 'confirmado' : ''">
+                                  <td align="center" style='vertical-align: middle;width:200px;'>{{hrDisp.funcionario.idFuncional}}</td> 
+                                  <td align="center" style='vertical-align: middle;width:200px;'>{{hrDisp.funcionario.nome}}</td> 
+                                  <td align="center" style='vertical-align: middle;width:200px;'>{{hrDisp.task}}</td> 
+                                  <ng-container *ngFor="let hrPrev of hrDisp.paginacaoHorasPrev[ss.selectedPage].horasPrevista">     
+                                    <td align="center" scope="col">
+                                      {{hrPrev.horasPrevistas}}h
+                                    </td>
+                                    <td align="center" scope="col" [className]="hrPrev.lancamentoCorreto ? 'lancamentoCorreto' : 'lancamentoIncorreto'">
+                                      {{hrPrev.horasLancadas}}h
+                                    </td>
+                                    <td align="center" style='vertical-align: middle;' scope="col"><input type='checkbox' (click)="confirmarLancamento(hrPrev,hrDisp);" [(ngModel)]="hrPrev.lancamentoConfirmado" [ngModelOptions]="{standalone: true}"></td>
+                                  </ng-container>
+                                </tr>
+                              </ng-container>
+                            </tbody>
+                          </table>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+    </form>
+  </div>
+</div>

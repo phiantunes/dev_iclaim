@@ -1,0 +1,133 @@
+<div id="component-wrap" class="component-wrap">
+
+  <div class="submit-wrap col-md-11">
+    <div class="title-description">
+      <h2>Lançamento de Horas Diárias</h2>
+      <p>Siga os passos do formulário abaixo para lançar horas em uma SS, para o dia de hoje.</p>
+      <hr>
+    </div>
+
+
+    <form *ngIf="isadmin" class="needs-validation" name="FormLider" novalidate>
+      <p>Este formulário só ficará disponível para preenchimento <b>até às 15h</b> de cada dia.</p>
+      <h3>Primeiro, o líder!</h3>
+      <div class="form-row row-flex">
+        <div class="col-md-11 mb-3">
+          <label for="lider"><b>1. </b>Para qual dos líderes você irá lançar horas?</label>
+          <select class="custom-select" id="lider" name="lider" [(ngModel)]="modelLider.idFuncional" required>
+            <option *ngFor="let lider of lideresList" [ngValue]="lider.idFuncional">{{ lider.nome }}</option>
+          </select>
+          <small id="squadHelpBlock" class="form-text text-muted">
+            Selecione um dos líderes e clique no botão de pesquisar.
+          </small>
+          <div class="valid-feedback">
+            Ótimo!
+          </div>
+          <div class="invalid-feedback">
+            Você precisa selecionar um líder.
+          </div>
+        </div>
+        <button (click)="SelecionarLider(modelLider.idFuncional)" class="btn btn-primary def-button mb-3"><i
+            class="fas fa-search"></i></button>
+      </div>
+      <hr>
+    </form>
+
+    <form *ngIf="!isadmin" class="needs-validation" name="FormLider" novalidate>
+        <h3>Ola Lider,</h3>
+        <div class="form-row row-flex">
+          <div class="col-md-11 mb-3">
+            <label for="lider">Este formulário só ficará
+              disponível para preenchimento <b>até às 15h</b> de cada dia.</label>
+            <small id="squadHelpBlock" class="form-text text-muted">
+              Clique no botao para carregar suas SS's disponiveis.
+            </small>
+            <div class="valid-feedback">
+              Ótimo!
+            </div>
+            <div class="invalid-feedback">
+              Você precisa selecionar um líder.
+            </div>
+          </div>
+          <button (click)="SelecionarLiderByEmail()" class="btn btn-primary def-button mb-3"><i
+            class="fas fa-search"></i></button>
+        </div>
+        <hr>
+      </form>
+
+
+    <form class="needs-validation second-form" name="LancamentoHoras" novalidate>
+      <h3>Ótimo, hora de lançar!</h3>
+      <p id="weekdayP"></p>
+
+      <div class="form-row row-flex">
+
+        <div *ngFor="let squad of squadList" class="card-outter col-md-12">
+          <h5>Squad: {{ squad.name }}</h5>
+          <p>Preencha, para cada SS desta squad, as horas por funcionário para o dia de hoje.</p>
+
+          <div *ngFor="let ss of squad.sss" class="card-outter ss col-md-12">
+            <div class='row'>
+              <div class="col-md-7" style='line-height: 80%;'>
+                  <label>
+                    [SS {{(ss.forLider == true?"Lider":"Squad")}}: {{ ss.ssId }}] - {{ ss.descricao}}</label> <br/>
+                  <label class='subtitulo'>Preiodo: {{ ss.dataInicio | date: 'dd/MM/yyyy' }} - {{ ss.dataTermino | date: 'dd/MM/yyyy' }}</label><br/>
+                  <label class='subtitulo'>
+                      Horas Restantes: {{ ss.horasRestantes }}
+                  </label>
+              </div>
+
+              <div class="col-md-5">
+                  <button (click)="nextPage(ss)" class="btn btn-primary def-button btn-func btn-change-page" style='width:50px;margin:0;top:0;float:right;'>>></button>
+                  <button (click)="actualPage(ss)" class="btn btn-primary def-button btn-func btn-change-page" style='width:70px;margin:0;top:0;float:right;margin-right:10px;'>hoje</button>
+                  <button (click)="previousPage(ss)" class="btn btn-primary def-button btn-func" style='width:50px;margin:0;top:0;margin-right:10px;float:right;'><<</button>
+              </div>
+            </div>
+
+            <div class="table-responsive"style='margin-top:20px;'>
+              <table class="table ">
+                <thead class="thead">
+                  <tr>
+                      <td align="center" style='vertical-align: middle;' scope="col">Funcionario</td>
+                      <ng-container *ngFor="let hrPrev of ss.horasDisponiveis[0].paginacaoHorasPrev[ss.selectedPage].horasPrevista">
+                        <td align="center" scope="col" [className]="hrPrev.permitirLancamento ? 'dataAtualHeader border-top' : ''">{{hrPrev.data | date:"EEEE"}} <br/>({{hrPrev.data | date:"dd/MM/yyyy"}})</td>	
+                      </ng-container>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let hrDisp of ss.horasDisponiveis">
+                    <td align="center" style='vertical-align: middle;width:200px;'>{{hrDisp.funcionario.nome}}<br/>(Hrs Disp: {{hrDisp.horasPlanejadas - hrDisp.horasConsumidas}})</td>
+                    <ng-container *ngFor="let hrPrev of hrDisp.paginacaoHorasPrev[ss.selectedPage].horasPrevista">
+                    <td align="center" scope="col"[className]="hrPrev.permitirLancamento ? 'dataAtual' : ''">
+                    
+                      <table class="table hrPrev">
+                        <thead class="thead">
+                          <tr>
+                            <td align="center" >Prev.</td>
+                            <td align="center" >Lanc.</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td align="center" class='first-column' ><input type='text' class="form-control campo" [disabled]="hrPrev.id == 0" [(ngModel)]="hrPrev.horasPrevistas" [ngModelOptions]="{standalone: true}"></td>
+                            <td align="center" ><input type='text' [className]="hrPrev.lancamentoCorreto ? 'form-control campo' : 'form-control campo lancamentoIncorreto'" [disabled]="hrPrev.id == 0 || !hrPrev.permitirLancamento" (change)="verificarHoras(hrDisp,hrPrev,ss)" [(ngModel)]="hrPrev.horasLancadas" [ngModelOptions]="{standalone: true}"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </td>
+                  </ng-container>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div>
+              <button (click)="lancarHoras(ss)" class="btn btn-primary def-button btn-func" style='margin-top:10px;'>SALVAR</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

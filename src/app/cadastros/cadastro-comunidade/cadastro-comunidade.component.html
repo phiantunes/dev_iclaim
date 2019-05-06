@@ -1,0 +1,29 @@
+<div class="component-wrap">
+  <div class="submit-wrap col-md-11">
+    <div class="title-description">
+      <h2>Cadastro de Comunidade</h2>
+      <p>Prencha todos os campos abaixo para cadastrar uma nova Comunidade.</p>
+      <hr>
+    </div>
+    <form class="needs-validation" name="comunidadeform" (submit)="CadastrarComunidade()" novalidate>
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <label for="name">Nome da Comunidade</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome"
+            [(ngModel)]="comunidade.comunidadeName" required>
+          <div class="valid-feedback">
+            Ótimo!
+          </div>
+          <div class="invalid-feedback">
+            Você precisa preencher o nome da Comunidade.
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-centerer">
+        <button type="submit" class="btn btn-primary def-button">Cadastrar Comunidade</button>
+        <button type="reset" class="btn btn-primary clear-button">LIMPAR</button>
+      </div>
+    </form>
+  </div>
+</div>

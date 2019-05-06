@@ -1,0 +1,35 @@
+<div class="whole-wrap">
+
+    <div class="right-layer"></div>
+    <div class="right-layer right-layer--2"></div>
+    <div class="right-layer right-layer--3"></div>
+
+  <div class="login-wrap col-md-8">
+    <div class="div-side-1 col-md-6 h-100"></div>
+    <div class="div-side-2 col-md-6 h-100">
+      <div class="login-form">
+        <h1>Login - Projeto Itaú</h1>
+        <p>Para começar, entre com sua conta, ou solicite uma nova.</p>
+
+        <form [formGroup]="loginForm" (submit)="login()">
+          <div class="col-md-12 mb-2 login-input form-group">
+            <input #emailInput formControlName="email" type="email" class="form-control" placeholder="E-mail" autofocus>
+            <small *ngIf="loginForm.get('email').errors?.required" class="text-danger d-block mt-2">
+              Digite o e-mail!
+            </small>
+          </div>
+          <div class="col-md-12 mb-2 login-input">
+            <input formControlName="senha" type="password" class="form-control" placeholder="Senha">
+            <small *ngIf="loginForm.get('senha').errors?.required" class="text-danger d-block mt-2">
+              Digite a senha!
+            </small>
+          </div>
+
+          <button [disabled]="loginForm.invalid" type="submit" id="right" class="btn btn-primary def-button">Fazer login</button>
+          
+        </form>
+      </div>
+      <a href="#">Esqueceu sua senha?</a>
+    </div>
+  </div>
+</div>

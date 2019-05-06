@@ -1,0 +1,25 @@
+<div class="component-wrap">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Funcional</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Email</th>
+        <th scope="col">Pefil</th>
+        <th scope="col">Squad</th>
+        <th scope="col">Opt</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let funcionario of funcionarios">
+        <th scope="row">{{funcionario.idFuncional}}</th>
+        <td>{{funcionario.nome}}</td>
+        <td>{{funcionario.email}}</td>
+        <td>{{funcionario.perfil}}</td>
+        <td>{{(funcionario.squad == undefined?"":funcionario.squad.name)}}</td>
+        <td><a class="btn btn-dark" href='/new/employee?funcional={{funcionario.idFuncional}}'>Editar</a>
+          <button (click)="deletar(funcionario.idFuncional)" type="button" class="btn btn-dark">X</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

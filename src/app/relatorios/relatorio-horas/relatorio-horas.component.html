@@ -1,0 +1,31 @@
+<div class="component-wrap">
+    <div class="submit-wrap col-md-11">
+        <div class="title-description">
+            <h2>Relatorio de Horas</h2>
+            <p>Prencha todos os campos abaixo para gerar seu relatorio.</p>
+            <hr>
+        </div>
+        <form class="needs-validation" name="comunidadeform" novalidate>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="datainicio">Data de início</label>
+                    <input type="date" class="form-control" id="datainicio" name="datainicio" [(ngModel)]="dataInicio" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="datatermino">Data de término</label>
+                    <input type="date" class="form-control" id="datatermino" name="datatermino" [(ngModel)]="dataTermino" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="tipo">Filtro</label>
+                    <select class="custom-select" id="tipo" [(ngModel)]="filtro" name="tipo" required>
+                        <option [ngValue]="total">Geral</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="btn-centerer">
+                <button type="button" class="btn btn-primary def-button" (click)="gerarRelatorio()" >Gerar Relatorio</button>
+            </div>
+        </form>
+    </div>
+</div>

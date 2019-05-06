@@ -1,0 +1,41 @@
+.btnSize {
+  width: 150px;
+  height: 40px;
+}
+.card-outter {
+  border-radius: 10px;
+  background-color: #fcfcfc;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.component-wrap {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: stretch;
+  color: #222;
+}
+
+.submit-wrap {
+  margin: 2rem;
+  padding: 2rem;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.1);
+  -webkit-transition: all .3s cubic-bezier(.18, .89, .32, 1.28);
+  -moz-transition: all .3s cubic-bezier(.18, .89, .32, 1.28);
+  transition: all .3s cubic-bezier(.18, .89, .32, 1.28);
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  justify-content: center;
+}
+.card-body{
+  padding: 0;
+}
+
+.btncolor:active {
+  background-color: orange;
+}

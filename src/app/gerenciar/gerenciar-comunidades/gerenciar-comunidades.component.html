@@ -1,0 +1,17 @@
+<div class="component-wrap">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Opt</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let comunidade of comunidades">
+          <td>{{comunidade.comunidadeName}}</td>
+          <td><a class="btn btn-dark" href="/new/comunidade?idComunidade={{comunidade.idComunidade}}">Editar</a>
+            <button (click)="deletar(comunidade.idComunidade)" type="button" class="btn btn-dark">X</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

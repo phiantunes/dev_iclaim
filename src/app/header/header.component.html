@@ -1,0 +1,21 @@
+<div class="app-header">
+    <div class="header-options">
+        <a (click)="BackHistory()"><i class="fas fa-arrow-left"></i></a>
+        <span>|</span>
+        <a routerLink="/dashboard"><i class="fas fa-home"></i></a>
+      </div>
+  <div class="header-logos">
+    ITAU & IBM
+  </div>
+  <div  class="header-options">
+      <div class="dropdown dropleft">
+          <a id="user-icon" class="dropdown-toggle"data-toggle="dropdown"><i class="fas fa-user-circle"></i></a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button class="dropdown-item" type="button" disabled> {{ usuario.sub }}</button>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item" type="button"  routerLink="/perfil"><i class="fas fa-address-card"></i> Perfil</button>
+            </div>
+      <span>|</span>
+      <a (click)="logout()"><i class="fas fa-sign-out-alt"></i></a>
+  </div>
+</div>

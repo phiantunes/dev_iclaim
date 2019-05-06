@@ -1,0 +1,68 @@
+.card-outter{
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.1);
+}
+.card-outter:hover{
+    background-color: #fafafa;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+    transform: scale(1.01);
+}
+.component-wrap{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    color: #222;
+}
+h2{
+    margin: 1rem;
+}
+
+.dashboard-options{
+    padding: 1rem;
+    margin: 2rem 1rem;
+    -webkit-transition: all .3s cubic-bezier(.18, .89, .32, 1.28);
+    -moz-transition: all .3s cubic-bezier(.18, .89, .32, 1.28);
+    transition: all .3s cubic-bezier(.18, .89, .32, 1.28);
+}
+.dashboard-expiring-ss{
+    padding: 1rem;
+    margin: 2rem 1rem;
+    height: calc(100% - 4rem);
+    -webkit-transition: all .3s cubic-bezier(.18, .89, .32, 1.28);
+    -moz-transition: all .3s cubic-bezier(.18, .89, .32, 1.28);
+    transition: all .3s cubic-bezier(.18, .89, .32, 1.28);
+}
+
+.cards-wrap{
+    display: flex;
+    flex-flow: row wrap;
+}
+.cards-wrap a{
+    color: #222;
+    text-decoration: none;
+    flex: 1 1 15em;
+    margin: 1rem;
+    
+}
+
+.dashboard-options-card{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: stretch;
+}
+.dashboard-options-card img{
+    max-height: 100px;
+}
+.dashboard-options-card p{
+    margin: 0;
+    margin-right: 1rem;
+    font-weight: bold;
+}
+.dashboard-options-card b{
+    font-weight: 400;
+    color: #888;
+    font-size: 0.8rem;
+}
